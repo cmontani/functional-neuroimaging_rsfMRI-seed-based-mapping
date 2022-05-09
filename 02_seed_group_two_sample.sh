@@ -7,6 +7,12 @@
 # groupA and groupB are the group names contained in the filenames.
 # seedlist.txt has been already produced with 01_seed_subjects_correlation_maps.sh
 #
+#
+# NB: When running the script, make sure the seeds in the $path_seeds folder do not share a suffix after an underscore 
+# (e.g., if you have hippocampus_bilateral and insula_bilateral in the same folder, change either of those so that the names do not match). 
+# The script might otherwise group the maps resulting from each seed together erroneously. Best practice in this case would be to avoid using 
+# underscores for seed names, but rather give one word names i.e. insulabilateral instead of insula_bilateral.
+#
 # -----------------------------------------------------------
 # Script written by Marco Pagani
 # Functional Neuroimaging Lab, 
