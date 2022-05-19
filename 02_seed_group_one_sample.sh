@@ -1,20 +1,32 @@
 #!/bin/bash
 
-# This script performs one-sample t-test of seed based connectivity mapping. 
+# This script performs one-sample t-test of seed based connectivity mapping.
 # Use this code in case you have only one group in your study
-# Use this script after 01_seed_subjects_correlation_maps.sh as you need seedlist.txt 
+# Use this script after 01_seed_subjects_correlation_maps.sh as you need seedlist.txt
 #
 # -----------------------------------------------------------
 # Script written by Marco Pagani
-# Functional Neuroimaging Lab, 
+# Functional Neuroimaging Lab,
 # Istituto Italiano di Tecnologia, Rovereto
 # (2018)
 # -----------------------------------------------------------
 
 seedlist=seedlist.txt
 
+function check_seed_name {
+  seed=$1
+  seed_name=$(basename $seed .nii.gz)
+  SUB='_' #offending character
+
+  if [[ "$seed_name" == *"$SUB"* ]]; then
+    echo "{$seed_name}: This naming convention is not permitted. Please use a seed name without underscores (_)"
+    echo "Error: Aborting script"
+    exit 1
+  fi
+}
+
 function seed_group_level_map {
- 
+
     seed=$1
     seed_name=$(basename $seed .nii.gz)
 
@@ -32,7 +44,7 @@ function seed_group_level_map {
         -expr "a" \
         -prefix 04_group_level/${seed_name}_onesample_Tstat.nii.gz
 
-rm 04_group_level/${seed_name}_results.nii.gz 
+rm 04_group_level/${seed_name}_results.nii.gz
 
 }
 export -f seed_group_level_map
@@ -43,9 +55,13 @@ mkdir 04_group_level
 
 while read -r seed;
 	do
+	check_seed_name $seed
+	done < $seedlist
+
+while read -r seed;
+	do
 	seed_group_level_map $seed
 	done < $seedlist
 
 
 exit
-

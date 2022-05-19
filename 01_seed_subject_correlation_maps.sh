@@ -6,12 +6,12 @@
 # seed inter-group differences measured with global connectivity
 # as in Pagani et al NatComm 2020 (Figure 1). The output is a
 # voxelwise pearson's correlation map for each ts and each seed,
-# that you will use for intergroup comparisons (e.g. wild-type 
+# that you will use for intergroup comparisons (e.g. wild-type
 # mice vs ko mice).
 #
 # -----------------------------------------------------------
 # Script written by Marco Pagani
-# Functional Neuroimaging Lab, 
+# Functional Neuroimaging Lab,
 # Istituto Italiano di Tecnologia, Rovereto
 # (2018)
 # -----------------------------------------------------------
