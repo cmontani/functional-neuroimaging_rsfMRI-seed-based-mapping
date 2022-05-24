@@ -4,6 +4,11 @@
 # Use this code in case you have only one group in your study
 # Use this script after 01_seed_subjects_correlation_maps.sh as you need seedlist.txt
 #
+# NB: When running the script, make sure the seed names in the $path_seeds folder do not contain underscores.
+# We have added an extra check that prints an error and kills the script if an underscore in present.
+# To double check the script is appropriately grouping your subjects, the subjects in each group are listed
+# in ts_list_${seed}.txt files in the 04_groups_log folder.
+#
 # -----------------------------------------------------------
 # Script written by Marco Pagani
 # Functional Neuroimaging Lab,
@@ -49,9 +54,26 @@ rm 04_group_level/${seed_name}_results.nii.gz
 }
 export -f seed_group_level_map
 
+function check_groups {
+
+   seed=$1
+   seed_name=$(basename $seed .nii.gz)
+
+   path_ts=03_subject_maps
+
+   echo $path_ts/*_${seed_name}_z.nii.gz | tr " " "\n" > 04_groups_log/tslist_${seed_name}.txt
+
+
+}
+
 # Main starts here
 
-mkdir 04_group_level
+mkdir 04_group_level 04_groups_log
+
+while read -r seed;
+	do
+	check_groups $seed
+	done < $seedlist
 
 while read -r seed;
 	do

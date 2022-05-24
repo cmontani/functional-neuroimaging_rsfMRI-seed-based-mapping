@@ -8,7 +8,7 @@
 # seedlist.txt has been already produced with 01_seed_subjects_correlation_maps.sh
 #
 # NB: When running the script, make sure the seed names in the $path_seeds folder do not contain underscores.
-# We have added an extra check that prints an error if an underscore in present.
+# We have added an extra check that prints an error and kills the script if an underscore in present.
 # To double check the script is appropriately grouping your subjects, the subjects in each group are listed
 # in ts_list_${group}_${seed}.txt files in the 04_groups_log folder.
 #
@@ -105,6 +105,7 @@ while read -r seed;
 	do
 	check_groups $seed
 	done < $seedlist
+
 while read -r seed;
 	do
 	check_seed_name $seed
