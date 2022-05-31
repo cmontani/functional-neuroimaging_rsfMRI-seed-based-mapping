@@ -18,6 +18,8 @@
 
 seedlist=seedlist.txt
 
+path_ts=03_subject_maps # edit here if necessary
+
 function check_seed_name {
   seed=$1
   seed_name=$(basename $seed .nii.gz)
@@ -59,16 +61,15 @@ function check_groups {
    seed=$1
    seed_name=$(basename $seed .nii.gz)
 
-   path_ts=03_subject_maps
 
-   echo $path_ts/*_${seed_name}_z.nii.gz | tr " " "\n" > 04_groups_log/tslist_${seed_name}.txt
+   echo $path_ts/*_${seed_name}_z.nii.gz | tr " " "\n" > 04_groups_level/logs/tslist_${seed_name}.txt
 
 
 }
 
 # Main starts here
 
-mkdir 04_group_level 04_groups_log
+mkdir 04_group_level 04_groups_level/logs
 
 while read -r seed;
 	do
