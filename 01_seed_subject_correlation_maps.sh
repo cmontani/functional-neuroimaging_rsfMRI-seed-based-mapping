@@ -36,7 +36,7 @@ function warnings_seed_names {
 function seed_subject_correlation_map {
     ts=$1
     seed=$2
-    brainmask=/home/imaging/Silvia_Gini/seed_based_bug/chd8_functional_template_mask.nii.gz #edit this
+    brainmask=/home/seed_based_bug/chd8_functional_template_mask.nii.gz #edit this
 
     subj_name=$(basename $ts .nii.gz)
     seed_name=$(basename $seed .nii.gz)
