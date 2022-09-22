@@ -47,8 +47,8 @@ function seed_group_level_map {
 
 
     3dttest++ \
-        -setA 03_subject_maps/*_${groupA}_*_${seed_name}_z.nii.gz \
-        -setB 03_subject_maps/*_${groupB}_*_${seed_name}_z.nii.gz \
+        -setA ${path_ts}/*_${groupA}_*_${seed_name}_z.nii.gz \
+        -setB ${path_ts}/*_${groupB}_*_${seed_name}_z.nii.gz \
         -prefix 04_group_level/${seed_name}_results.nii.gz #-paired
 
     3dcalc \
