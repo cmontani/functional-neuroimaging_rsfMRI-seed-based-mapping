@@ -38,7 +38,7 @@ function seed_group_level_map {
     seed_name=$(basename $seed .nii.gz)
 
     3dttest++ \
-        -setA 03_subject_maps/*_${seed_name}_z.nii.gz \
+        -setA ${path_ts}/*_${seed_name}_z.nii.gz \
         -prefix 04_group_level/${seed_name}_results.nii.gz
 
     3dcalc \
