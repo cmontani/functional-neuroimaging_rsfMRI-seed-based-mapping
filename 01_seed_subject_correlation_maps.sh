@@ -6,12 +6,12 @@
 # seed inter-group differences measured with global connectivity
 # as in Pagani et al NatComm 2020 (Figure 1). The output is a
 # voxelwise pearson's correlation map for each ts and each seed,
-# that you will use for intergroup comparisons (e.g. wild-type 
+# that you will use for intergroup comparisons (e.g. wild-type
 # mice vs ko mice).
 #
 # -----------------------------------------------------------
 # Script written by Marco Pagani
-# Functional Neuroimaging Lab, 
+# Functional Neuroimaging Lab,
 # Istituto Italiano di Tecnologia, Rovereto
 # (2018)
 # -----------------------------------------------------------
@@ -22,10 +22,21 @@ path_seeds=$PWD/02_seeds/ # edit this, folder containing seeds
 
 numjobs=7
 
+
+function warnings_seed_names {
+  seed=$1
+  seed_name=$(basename $seed .nii.gz)
+  SUB='_' #offending character
+
+  if [[ "$seed_name" == *"$SUB"* ]]; then
+    echo -e "\e[43m {$seed_name}: Please use a seed name without underscores (_), as this might be problematic for group-level analyses\e[0m"
+  fi
+}
+
 function seed_subject_correlation_map {
     ts=$1
     seed=$2
-    brainmask=/home/imaging/config/scripts/restingstate_scripts/chd8_functional_template_mask_wo_cerebellum.nii.gz #edit this
+    brainmask=/home/seed_based_bug/chd8_functional_template_mask.nii.gz #edit this
 
     subj_name=$(basename $ts .nii.gz)
     seed_name=$(basename $seed .nii.gz)
@@ -57,6 +68,12 @@ echo $path_ts/ag*.nii.gz | tr " " "\n" > tslist.txt
 echo $path_seeds/*.nii.gz | tr " " "\n" > seedlist.txt
 
 mkdir 03_subject_maps
+
+
+while read -r seed;
+	do
+	warnings_seed_names $seed
+	done < seedlist.txt
 
 while read -r seed;
 do
